@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { trpc } from "@/lib/trpc";
 import { ArrowLeft, BookOpen, CheckCircle2, Circle } from "lucide-react";
 import { Link, useParams } from "wouter";
+import { MobileMenu } from "@/components/MobileMenu";
 
 export default function Module() {
   const { moduleId } = useParams();
@@ -42,17 +43,18 @@ export default function Module() {
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/20">
       {/* Header */}
       <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center gap-4">
+        <div className="container flex h-16 items-center justify-between">
           <Link href="/">
             <Button variant="ghost" size="sm">
               <ArrowLeft className="mr-2 h-4 w-4" />
               Voltar
             </Button>
           </Link>
-          <div className="flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-2">
             <BookOpen className="h-5 w-5 text-primary" />
             <h1 className="text-lg font-semibold">{currentModule.title}</h1>
           </div>
+          <MobileMenu />
         </div>
       </header>
 

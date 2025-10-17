@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, BookOpen } from "lucide-react";
-import { useLocation } from "wouter";
+import { Link } from "wouter";
 import { VerbConjugation } from "@/components/VerbConjugation";
+import { MobileMenu } from "@/components/MobileMenu";
 
 export default function Grammar() {
-  const [, setLocation] = useLocation();
 
   const verbZijn = {
     verb: "zijn",
@@ -39,31 +39,38 @@ export default function Grammar() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white">
-      <div className="container mx-auto px-4 py-8 max-w-5xl">
-        <Button
-          variant="ghost"
-          onClick={() => setLocation("/")}
-          className="mb-6 hover:bg-orange-100"
-        >
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Voltar
-        </Button>
-
-        <div className="mb-8">
-          <div className="flex items-center gap-3 mb-4">
-            <BookOpen className="h-8 w-8 text-orange-600" />
-            <h1 className="text-4xl font-bold text-gray-900">Gramática: Verbos Essenciais</h1>
+    <div className="min-h-screen bg-gradient-to-b from-background to-muted/20">
+      {/* Header */}
+      <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container flex h-16 items-center justify-between">
+          <Link href="/">
+            <Button variant="ghost" size="sm">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Voltar
+            </Button>
+          </Link>
+          <div className="hidden md:flex items-center gap-2">
+            <BookOpen className="h-5 w-5 text-primary" />
+            <h1 className="text-lg font-semibold">Gramática</h1>
           </div>
-          <p className="text-lg text-gray-600">
-            Aprenda a conjugar os dois verbos mais importantes do holandês: <strong>zijn</strong> (ser/estar) e <strong>hebben</strong> (ter).
-          </p>
+          <MobileMenu />
+        </div>
+      </header>
+
+      <div className="container py-8">
+        <div className="mx-auto max-w-5xl">
+          <div className="mb-8">
+            <h2 className="text-3xl font-bold mb-4">Verbos Essenciais</h2>
+            <p className="text-lg text-muted-foreground">
+              Aprenda a conjugar os dois verbos mais importantes do holandês: <strong>zijn</strong> (ser/estar) e <strong>hebben</strong> (ter).
+            </p>
+          </div>
         </div>
 
-        <div className="space-y-8">
-          <VerbConjugation {...verbZijn} />
-          <VerbConjugation {...verbHebben} />
-        </div>
+          <div className="space-y-8">
+            <VerbConjugation {...verbZijn} />
+            <VerbConjugation {...verbHebben} />
+          </div>
 
         <div className="mt-8 p-6 bg-gradient-to-r from-blue-50 to-orange-50 rounded-lg border border-orange-200">
           <h3 className="text-xl font-bold text-gray-900 mb-3">📚 Dicas de Estudo</h3>

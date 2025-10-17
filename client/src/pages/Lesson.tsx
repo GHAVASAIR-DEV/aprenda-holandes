@@ -10,6 +10,7 @@ import { ArrowLeft, ArrowRight, BookOpen, CheckCircle2, Volume2, XCircle } from 
 import { speakDutch } from "@/lib/audio";
 import { Link, useParams, useLocation } from "wouter";
 import { toast } from "sonner";
+import { MobileMenu } from "@/components/MobileMenu";
 
 export default function Lesson() {
   const { lessonId } = useParams();
@@ -106,15 +107,16 @@ export default function Lesson() {
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/20">
       {/* Header */}
       <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center gap-4">
+        <div className="container flex h-16 items-center justify-between">
           <Button variant="ghost" size="sm" onClick={() => window.history.back()}>
             <ArrowLeft className="mr-2 h-4 w-4" />
             Voltar
           </Button>
-          <div className="flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-2">
             <BookOpen className="h-5 w-5 text-primary" />
             <h1 className="text-lg font-semibold">{lesson.title}</h1>
           </div>
+          <MobileMenu />
         </div>
       </header>
 

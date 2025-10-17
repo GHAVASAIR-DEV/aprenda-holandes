@@ -6,6 +6,7 @@ import { APP_TITLE, getLoginUrl } from "@/const";
 import { trpc } from "@/lib/trpc";
 import { BookOpen, GraduationCap, Headphones, Trophy } from "lucide-react";
 import { Link } from "wouter";
+import { MobileMenu } from "@/components/MobileMenu";
 
 export default function Home() {
   const { user, isAuthenticated } = useAuth();
@@ -41,27 +42,28 @@ export default function Home() {
             <BookOpen className="h-6 w-6 text-primary" />
             <h1 className="text-xl font-bold">{APP_TITLE}</h1>
           </div>
-          <div className="flex items-center gap-4">
+          
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-4">
             {isAuthenticated ? (
-              <div className="flex items-center gap-4">
+              <>
                 <span className="text-sm text-muted-foreground">Olá, {user?.name}</span>
-          <Link href="/progresso">
-            <Button variant="outline" size="lg" className="w-full sm:w-auto">
-              Meu Progresso
-            </Button>
-          </Link>
-          <Link href="/gramatica">
-            <Button variant="outline" size="lg" className="w-full sm:w-auto">
-              📚 Gramática
-            </Button>
-          </Link>
-              </div>
+                <Link href="/progresso">
+                  <Button variant="outline">Meu Progresso</Button>
+                </Link>
+                <Link href="/gramatica">
+                  <Button variant="outline">📚 Gramática</Button>
+                </Link>
+              </>
             ) : (
               <a href={getLoginUrl()}>
                 <Button size="sm">Entrar</Button>
               </a>
             )}
-          </div>
+          </nav>
+
+          {/* Mobile Menu */}
+          <MobileMenu />
         </div>
       </header>
 
