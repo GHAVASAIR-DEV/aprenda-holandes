@@ -154,3 +154,37 @@ export async function updateProgress(userId: string, lessonId: string, completed
   
   return { success: true };
 }
+
+export async function getUserProgressByModule(userId: string) {
+  const db = await getDb();
+  if (!db) return [];
+  
+  const { modules, lessons, userProgress } = await import("../drizzle/schema");
+  
+  // Get all modules
+  const allModules = await db.select().from(modules).orderBy(modules.orderIndex);
+  
+  // Get all lessons
+  const allLessons = await db.select().from(lessons);
+  
+  // Get user progress
+  const progress = await db.select().from(userProgress).where(eq(userProgress.userId, userId));
+  
+  // Calculate progress for each module
+  return allModules.map((module) => {
+    const moduleLessons = allLessons.filter((l) => l.moduleId === module.id);
+    const total = moduleLessons.length;
+    const completed = progress.filter(
+      (p) => moduleLessons.some((l) => l.id === p.lessonId) && p.completed === "true"
+    ).length;
+    const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
+    
+    return {
+      moduleId: module.id,
+      moduleTitle: module.title,
+      completed,
+      total,
+      percentage,
+    };
+  });
+}

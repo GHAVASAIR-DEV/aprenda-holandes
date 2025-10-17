@@ -14,6 +14,9 @@ export default function Progress() {
   const { data: progress, isLoading } = trpc.course.progress.useQuery(undefined, {
     enabled: isAuthenticated,
   });
+  const { data: moduleProgress } = trpc.course.progressByModule.useQuery(undefined, {
+    enabled: isAuthenticated,
+  });
 
   if (!isAuthenticated) {
     return (
@@ -41,18 +44,16 @@ export default function Progress() {
   const progressPercentage = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
 
   const getModuleProgress = (moduleId: string) => {
+    if (!moduleProgress) return { completed: 0, total: 0, percentage: 0 };
+    
+    const progress = moduleProgress.find((mp) => mp.moduleId === moduleId);
     if (!progress) return { completed: 0, total: 0, percentage: 0 };
     
-    const moduleLessons = progress.filter((p) => {
-      // This is a simplified check - in production, you'd join with lessons table
-      return true; // For now, we'll show all progress
-    });
-    
-    const completed = moduleLessons.filter((p) => p.completed === "true").length;
-    const total = moduleLessons.length;
-    const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
-    
-    return { completed, total, percentage };
+    return {
+      completed: progress.completed,
+      total: progress.total,
+      percentage: progress.percentage,
+    };
   };
 
   return (

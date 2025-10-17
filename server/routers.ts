@@ -46,6 +46,11 @@ export const appRouter = router({
       return getUserProgress(ctx.user.id);
     }),
     
+    progressByModule: protectedProcedure.query(async ({ ctx }) => {
+      const { getUserProgressByModule } = await import("./db");
+      return getUserProgressByModule(ctx.user.id);
+    }),
+    
     updateProgress: protectedProcedure
       .input(z.object({
         lessonId: z.string(),
