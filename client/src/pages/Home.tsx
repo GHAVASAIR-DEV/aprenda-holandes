@@ -14,10 +14,22 @@ export default function Home() {
     enabled: isAuthenticated,
   });
 
+  // Calculate total lessons from all modules
+  const getTotalLessons = () => {
+    // We have 39 lessons total in the A1 course
+    return 39;
+  };
+
   const getProgressPercentage = () => {
     if (!progress || progress.length === 0) return 0;
     const completed = progress.filter((p) => p.completed === "true").length;
-    return Math.round((completed / progress.length) * 100);
+    const total = getTotalLessons();
+    return Math.round((completed / total) * 100);
+  };
+
+  const getCompletedCount = () => {
+    if (!progress) return 0;
+    return progress.filter((p) => p.completed === "true").length;
   };
 
   return (
@@ -109,7 +121,7 @@ export default function Home() {
                     </div>
                   </div>
                   <p className="text-sm text-muted-foreground">
-                    {progress.filter((p) => p.completed === "true").length} de {progress.length}{" "}
+                    {getCompletedCount()} de {getTotalLessons()}{" "}
                     lições concluídas
                   </p>
                 </div>

@@ -35,7 +35,8 @@ export default function Progress() {
     );
   }
 
-  const totalLessons = progress?.length || 0;
+  // Total lessons in A1 course
+  const totalLessons = 39;
   const completedLessons = progress?.filter((p) => p.completed === "true").length || 0;
   const progressPercentage = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
 
