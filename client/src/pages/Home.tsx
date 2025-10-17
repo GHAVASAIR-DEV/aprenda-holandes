@@ -33,11 +33,16 @@ export default function Home() {
             {isAuthenticated ? (
               <div className="flex items-center gap-4">
                 <span className="text-sm text-muted-foreground">Olá, {user?.name}</span>
-                <Link href="/progresso">
-                  <Button variant="outline" size="sm">
-                    Meu Progresso
-                  </Button>
-                </Link>
+          <Link href="/progresso">
+            <Button variant="outline" size="lg" className="w-full sm:w-auto">
+              Meu Progresso
+            </Button>
+          </Link>
+          <Link href="/gramatica">
+            <Button variant="outline" size="lg" className="w-full sm:w-auto">
+              📚 Gramática
+            </Button>
+          </Link>
               </div>
             ) : (
               <a href={getLoginUrl()}>
