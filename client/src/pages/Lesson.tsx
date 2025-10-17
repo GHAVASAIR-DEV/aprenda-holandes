@@ -7,6 +7,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { trpc } from "@/lib/trpc";
 import { ArrowLeft, ArrowRight, BookOpen, CheckCircle2, Volume2, XCircle } from "lucide-react";
+import { speakDutch } from "@/lib/audio";
 import { Link, useParams, useLocation } from "wouter";
 import { toast } from "sonner";
 
@@ -159,7 +160,15 @@ export default function Lesson() {
                               <p className="font-medium text-primary">{item.dutch}</p>
                               <p className="text-xs text-muted-foreground">{item.pronunciation}</p>
                             </div>
-                            <Volume2 className="h-4 w-4 text-muted-foreground" />
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="h-6 w-6"
+                              onClick={() => speakDutch(item.dutch)}
+                              title="Ouvir pronúncia"
+                            >
+                              <Volume2 className="h-4 w-4 text-muted-foreground" />
+                            </Button>
                             <p className="text-sm">{item.portuguese}</p>
                           </div>
                         ))}
@@ -210,7 +219,13 @@ export default function Lesson() {
                     <div key={word.id} className="p-4 rounded-lg border bg-card">
                       <div className="flex items-center justify-between mb-2">
                         <p className="text-lg font-semibold text-primary">{word.dutch}</p>
-                        <Button variant="ghost" size="icon" className="h-8 w-8">
+                        <Button 
+                          variant="ghost" 
+                          size="icon" 
+                          className="h-8 w-8"
+                          onClick={() => speakDutch(word.dutch)}
+                          title="Ouvir pronúncia"
+                        >
                           <Volume2 className="h-4 w-4" />
                         </Button>
                       </div>

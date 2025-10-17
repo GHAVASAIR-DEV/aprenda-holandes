@@ -7,6 +7,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import Module from "./pages/Module";
 import Lesson from "./pages/Lesson";
+import Progress from "./pages/Progress";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -15,6 +16,7 @@ function Router() {
       <Route path={"/"} component={Home} />
       <Route path="/modulo/:moduleId" component={Module} />
       <Route path="/licao/:lessonId" component={Lesson} />
+      <Route path="/progresso" component={Progress} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
