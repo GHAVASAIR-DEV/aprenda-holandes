@@ -1,0 +1,14 @@
+{
+  "query": "SELECT id, title FROM lessons WHERE id IN ('lesson-2-6', 'lesson-3-6', 'lesson-4-6', 'lesson-5-6', 'lesson-6-6', 'lesson-7-6', 'lesson-8-6') ORDER BY id",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 34xiSeKvupEiHZW.906938e110d7 --database VSF8CcEsffsHgumgQ7B2j8 --execute SELECT id, title FROM lessons WHERE id IN ('lesson-2-6', 'lesson-3-6', 'lesson-4-6', 'lesson-5-6', 'lesson-6-6', 'lesson-7-6', 'lesson-8-6') ORDER BY id",
+  "rows": [
+    {
+      "id": "lesson-2-6",
+      "title": "Lição 2.6: Artigos \"de\" e \"het\""
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\nlesson-2-6\tLição 2.6: Artigos \"de\" e \"het\"\n",
+  "stderr": "",
+  "execution_time_ms": 170
+}

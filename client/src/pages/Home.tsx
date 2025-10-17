@@ -16,8 +16,8 @@ export default function Home() {
 
   // Calculate total lessons from all modules
   const getTotalLessons = () => {
-    // We have 39 lessons total in the A1 course
-    return 39;
+    // We have 46 lessons total in the A1 course (39 original + 7 grammar lessons)
+    return 46;
   };
 
   const getProgressPercentage = () => {

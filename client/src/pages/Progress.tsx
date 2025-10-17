@@ -38,8 +38,8 @@ export default function Progress() {
     );
   }
 
-  // Total lessons in A1 course
-  const totalLessons = 39;
+  // Total lessons in A1 course (39 original + 7 grammar lessons)
+  const totalLessons = 46;
   const completedLessons = progress?.filter((p) => p.completed === "true").length || 0;
   const progressPercentage = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
 
