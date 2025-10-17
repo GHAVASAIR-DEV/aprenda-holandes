@@ -276,15 +276,34 @@ export default function Lesson() {
                       )}
 
                       {currentExercise.type === "fill_blank" && (
-                        <RadioGroup value={selectedAnswer} onValueChange={setSelectedAnswer} disabled={showResult}>
-                          {currentExercise.options &&
-                            JSON.parse(currentExercise.options).map((option: string) => (
-                              <div key={option} className="flex items-center space-x-2 p-3 rounded-lg border hover:bg-muted/50 transition-colors">
-                                <RadioGroupItem value={option} id={option} />
-                                <Label htmlFor={option} className="flex-1 cursor-pointer">{option}</Label>
-                              </div>
-                            ))}
-                        </RadioGroup>
+                        <div className="space-y-4">
+                          <div className="p-4 bg-muted/30 rounded-lg border-2 border-dashed">
+                            <p className="text-lg">
+                              {currentExercise.question.split('_____').map((part, i, arr) => (
+                                <span key={i}>
+                                  {part}
+                                  {i < arr.length - 1 && (
+                                    <span className="inline-flex items-center justify-center min-w-[120px] h-8 mx-2 px-4 bg-background border-b-2 border-primary/50 font-medium text-primary">
+                                      {selectedAnswer || '?'}
+                                    </span>
+                                  )}
+                                </span>
+                              ))}
+                            </p>
+                          </div>
+                          <div className="space-y-2">
+                            <p className="text-sm font-medium text-muted-foreground">Escolha a palavra correta:</p>
+                            <RadioGroup value={selectedAnswer} onValueChange={setSelectedAnswer} disabled={showResult}>
+                              {currentExercise.options &&
+                                JSON.parse(currentExercise.options).map((option: string) => (
+                                  <div key={option} className="flex items-center space-x-2 p-3 rounded-lg border hover:bg-muted/50 transition-colors">
+                                    <RadioGroupItem value={option} id={option} />
+                                    <Label htmlFor={option} className="flex-1 cursor-pointer font-medium">{option}</Label>
+                                  </div>
+                                ))}
+                            </RadioGroup>
+                          </div>
+                        </div>
                       )}
                     </div>
 
