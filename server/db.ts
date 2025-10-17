@@ -85,4 +85,72 @@ export async function getUser(id: string) {
   return result.length > 0 ? result[0] : undefined;
 }
 
-// TODO: add feature queries here as your schema grows.
+// Course queries
+export async function getAllModules() {
+  const db = await getDb();
+  if (!db) return [];
+  const { modules } = await import("../drizzle/schema");
+  return db.select().from(modules).orderBy(modules.orderIndex);
+}
+
+export async function getLessonsByModule(moduleId: string) {
+  const db = await getDb();
+  if (!db) return [];
+  const { lessons } = await import("../drizzle/schema");
+  return db.select().from(lessons).where(eq(lessons.moduleId, moduleId)).orderBy(lessons.orderIndex);
+}
+
+export async function getLesson(lessonId: string) {
+  const db = await getDb();
+  if (!db) return null;
+  const { lessons } = await import("../drizzle/schema");
+  const result = await db.select().from(lessons).where(eq(lessons.id, lessonId)).limit(1);
+  return result.length > 0 ? result[0] : null;
+}
+
+export async function getExercisesByLesson(lessonId: string) {
+  const db = await getDb();
+  if (!db) return [];
+  const { exercises } = await import("../drizzle/schema");
+  return db.select().from(exercises).where(eq(exercises.lessonId, lessonId)).orderBy(exercises.orderIndex);
+}
+
+export async function getVocabularyByLesson(lessonId: string) {
+  const db = await getDb();
+  if (!db) return [];
+  const { vocabulary } = await import("../drizzle/schema");
+  return db.select().from(vocabulary).where(eq(vocabulary.lessonId, lessonId));
+}
+
+export async function getUserProgress(userId: string) {
+  const db = await getDb();
+  if (!db) return [];
+  const { userProgress } = await import("../drizzle/schema");
+  return db.select().from(userProgress).where(eq(userProgress.userId, userId));
+}
+
+export async function updateProgress(userId: string, lessonId: string, completed: boolean, score?: number) {
+  const db = await getDb();
+  if (!db) return null;
+  const { userProgress } = await import("../drizzle/schema");
+  const progressId = `${userId}-${lessonId}`;
+  
+  await db.insert(userProgress).values({
+    id: progressId,
+    userId,
+    lessonId,
+    completed: completed ? "true" : "false",
+    score: score?.toString(),
+    lastAccessedAt: new Date(),
+    completedAt: completed ? new Date() : null,
+  }).onDuplicateKeyUpdate({
+    set: {
+      completed: completed ? "true" : "false",
+      score: score?.toString(),
+      lastAccessedAt: new Date(),
+      completedAt: completed ? new Date() : null,
+    },
+  });
+  
+  return { success: true };
+}
