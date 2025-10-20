@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "buildCommand": "pnpm install && pnpm run build",
+  "devCommand": "pnpm run dev",
+  "installCommand": "pnpm install",
+  "framework": null,
+  "outputDirectory": "dist",
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "regions": ["iad1"],
+  "functions": {
+    "server/**/*.ts": {
+      "runtime": "nodejs22.x"
+    }
+  }
+}
+
