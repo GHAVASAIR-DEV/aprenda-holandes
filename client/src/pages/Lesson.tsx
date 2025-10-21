@@ -68,6 +68,18 @@ export default function Lesson() {
         });
       }
       toast.success("Lição concluída! 🎉");
+      
+      // Redirect back to module page
+      if (lesson?.moduleId) {
+        setTimeout(() => {
+          setLocation(`/module/${lesson.moduleId}`);
+        }, 1500);
+      } else {
+        // Fallback to home if no moduleId
+        setTimeout(() => {
+          setLocation("/");
+        }, 1500);
+      }
     }
   };
 
