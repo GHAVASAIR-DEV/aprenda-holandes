@@ -72,7 +72,7 @@ export default function Home() {
         <div className="container">
           <div className="mx-auto max-w-3xl text-center">
             <Badge className="mb-4" variant="secondary">
-              Curso Completo A1-A2
+              Curso Nível A1 (Iniciante)
             </Badge>
             <h2 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
               Aprenda Holandês do Zero
@@ -84,7 +84,7 @@ export default function Home() {
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <div className="flex items-center gap-2 rounded-lg border bg-card p-4">
                 <GraduationCap className="h-5 w-5 text-primary" />
-                <span className="text-sm font-medium">12 Módulos</span>
+                <span className="text-sm font-medium">8 Módulos A1</span>
               </div>
               <div className="flex items-center gap-2 rounded-lg border bg-card p-4">
                 <Headphones className="h-5 w-5 text-primary" />
@@ -139,7 +139,7 @@ export default function Home() {
           <div className="mb-8 text-center">
             <h3 className="text-3xl font-bold">Módulos do Curso</h3>
             <p className="mt-2 text-muted-foreground">
-              Comece do básico e avance até o nível intermediário
+              Aprenda holandês do zero com 8 módulos progressivos (Nível A1)
             </p>
           </div>
 
