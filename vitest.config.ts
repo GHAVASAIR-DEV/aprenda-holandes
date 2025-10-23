@@ -7,4 +7,9 @@ export default defineConfig({
     environment: "node",
     include: ["server/**/*.test.ts", "server/**/*.spec.ts"],
   },
+  resolve: {
+    alias: {
+      "@shared": path.resolve(__dirname, "./shared"),
+    },
+  },
 });
